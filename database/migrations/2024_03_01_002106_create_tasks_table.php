@@ -20,7 +20,6 @@ class CreateTasksTable extends Migration
             $table->dateTime('start_at')->nullable();
             $table->dateTime('end_at')->nullable();
             $table->string('priority');
-            $table->uuid('user_id')->nullable();
             $table->timestamps();
         });
     }

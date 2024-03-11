@@ -15,7 +15,7 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $tasks = Task::where('user_id', Auth::id())->get();
+        $tasks = Task::get();
 
         return response()->json($tasks);
     }
@@ -26,43 +26,25 @@ class TaskController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create(Request $request)
-{
-    $request->validate([
-        'title' => 'required|string|max:50',
-        'description' => 'required|string|max:50',
-        'start_at' => 'required|date|after:today',
-        'end_at' => 'required|date|after:start_at',
-        'priority' => 'required|string',
-    ]);
-
-    // Obtenha o ID do usuário autenticado
-    $userId = Auth::id();
-
-    $task = new Task();
-    $task->title = $request->input('title');
-    $task->description = $request->input('description');
-    $task->start_at = $request->input('start_at');
-    $task->end_at = $request->input('end_at');
-    $task->priority = $request->input('priority');
-    $task->user_id = $userId;
-
-    $task->save();
-
-    return response()->json($task, 201);
-}
-
-
-
-    /**
-     * Lista todas as tarefas do usuário autenticado.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function list()
     {
-        $tasks = Task::where('user_id', Auth::id())->get();
+        $request->validate([
+            'title' => 'required|string|max:50',
+            'description' => 'required|string|max:50',
+            'start_at' => 'required|date|after:today',
+            'end_at' => 'required|date|after:start_at',
+            'priority' => 'required|string',
+        ]);
 
-        return response()->json($tasks);
+        $task = new Task();
+        $task->title = $request->input('title');
+        $task->description = $request->input('description');
+        $task->start_at = $request->input('start_at');
+        $task->end_at = $request->input('end_at');
+        $task->priority = $request->input('priority');
+
+        $task->save();
+
+        return response()->json($task, 201);
     }
 
     /**
@@ -86,10 +68,6 @@ class TaskController extends Controller
 
         if (!$task) {
             return response()->json(['message' => 'Tarefa não encontrada'], 404);
-        }
-
-        if ($task->user_id != Auth::id()) {
-            return response()->json(['message' => 'Usuário não tem permissão para alterar essa tarefa'], 403);
         }
 
         $task->fill($request->all());
