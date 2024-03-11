@@ -66,6 +66,7 @@ $ cd to-do-list
 
 # IT WILL ONLY BE STARTED IF THE COMPOSER IS INSTALLED
 # REQUIRED MYSQL OPEN AND STARTED WITH APACHE IN XAMPP
+# NEED TO CHANGE .env TO EACH DB
 
 # Install dependencies
 $ php artisan migrate:fresh
