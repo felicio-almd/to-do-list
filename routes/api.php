@@ -15,11 +15,7 @@ use App\Http\Controllers\TaskController;
 |
 */
 
-// Rotas de autenticação de usuário
-Route::post('/login', [UserController::class, 'login']);
-Route::post('/register', [UserController::class, 'register']);
-
-// Rotas para tarefas protegidas (sem autenticação)
+// Rotas para tarefas (sem autenticação)
 // Route::middleware('auth.task')->group(function () {}
 Route::post('/tasks', [TaskController::class, 'create']);
 Route::get('/tasks', [TaskController::class, 'index']);
