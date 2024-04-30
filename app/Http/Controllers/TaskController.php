@@ -4,10 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\Task;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
+    private $tasks;
+
+    public function __construct(Task $task)
+    {
+        $this->tasks = $task;
+    }
+
     /**
      * Lista todas as tarefas do usuário autenticado.
      *
@@ -15,14 +21,14 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $tasks = Task::get();
+        $tasks = $this->tasks->all();
 
-        return response()->json($tasks);
+        return response()->json($tasks); // para API
     }
+
     /**
      * Criar uma nova tarefa.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function create(Request $request)
@@ -35,44 +41,49 @@ class TaskController extends Controller
             'priority' => 'required|string',
         ]);
 
-        $task = new Task();
-        $task->title = $request->input('title');
-        $task->description = $request->input('description');
-        $task->start_at = $request->input('start_at');
-        $task->end_at = $request->input('end_at');
-        $task->priority = $request->input('priority');
+        $data = $request->all();
+        $this->tasks->create($data);
 
-        $task->save();
+        return response()->json($data, 201);
+    }
 
-        return response()->json($task, 201);
+    public function show($id)
+    {
+        $task = $this->tasks->find($id);
+        $task = $task->load('livro');
+
+        return response()->json($task);
     }
 
     /**
      * Atualiza uma tarefa existente.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Task $task)
     {
         $request->validate([
-            'title' => 'string|max:50',
-            'description' => 'string|max:50',
-            'start_at' => 'date|after:today',
-            'end_at' => 'date|after:start_at',
-            'priority' => 'string',
+            'title' => 'required|string|max:50',
+            'description' => 'required|string|max:255',
+            'start_at' => 'required|date|after:today',
+            'end_at' => 'required|date|after:start_at',
+            'priority' => 'required|string',
         ]);
 
-        $task = Task::find($id);
+        $task->update($request->all());
 
-        if (!$task) {
-            return response()->json(['message' => 'Tarefa não encontrada'], 404);
-        }
-
-        $task->fill($request->all());
-        $task->save();
+        // return redirect()->route('tasks.index')->with('success', 'Tarefa atualizada com sucesso!');
 
         return response()->json($task);
+    }
+
+    public function delete(int $id)
+    {
+        $task = Task::findOrFail($id);
+        $task->delete();
+
+        return response()->json(['message' => 'cart deletado com sucesso!']);
+
+        // return redirect()->route('tasks.index')->with('success', 'Tarefa excluída com sucesso!');
     }
 }
