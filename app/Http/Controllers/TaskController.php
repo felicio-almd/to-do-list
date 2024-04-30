@@ -36,15 +36,21 @@ class TaskController extends Controller
         $request->validate([
             'title' => 'required|string|max:50',
             'description' => 'required|string|max:50',
-            'start_at' => 'required|date|after:today',
-            'end_at' => 'required|date|after:start_at',
+            'start_at' => 'date|after:today',
+            'end_at' => 'date|after:start_at',
             'priority' => 'required|string',
         ]);
 
-        $data = $request->all();
-        $this->tasks->create($data);
+        $task = new Task();
+        $task->title = $request->input('title');
+        $task->description = $request->input('description');
+        $task->start_at = $request->input('start_at');
+        $task->end_at = $request->input('end_at');
+        $task->priority = $request->input('priority');
 
-        return response()->json($data, 201);
+        $task->save();
+
+        return response()->json($task, 201);
     }
 
     public function show($id)
