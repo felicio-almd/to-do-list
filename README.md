@@ -64,7 +64,6 @@ $ git clone https://github.com/felicio-almd/to-do-list
 # Access the project folder
 $ cd to-do-list
 
-# Install Dependencies
 $ composer install
 
 # IT WILL ONLY BE STARTED IF THE COMPOSER IS INSTALLED
@@ -73,6 +72,7 @@ $ composer install
 
 # Install dependencies
 $ php artisan migrate:fresh
+$ php artisan key:generate
 
 # Run the project
 $ php artisan serve
