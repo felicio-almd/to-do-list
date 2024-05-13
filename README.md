@@ -64,6 +64,9 @@ $ git clone https://github.com/felicio-almd/to-do-list
 # Access the project folder
 $ cd to-do-list
 
+# Install Dependencies
+$ composer install
+
 # IT WILL ONLY BE STARTED IF THE COMPOSER IS INSTALLED
 # REQUIRED MYSQL OPEN AND STARTED WITH APACHE IN XAMPP
 # NEED TO CHANGE .env TO EACH DB
