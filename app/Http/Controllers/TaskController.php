@@ -31,9 +31,10 @@ class TaskController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function store(Request $request)
     {
-        $request->validate([
+        // Validação dos dados da requisição
+        $tasks = $request->validate([
             'title' => 'required|string|max:50',
             'description' => 'required|string|max:50',
             'start_at' => 'date|after:today',
@@ -41,22 +42,19 @@ class TaskController extends Controller
             'priority' => 'required|string',
         ]);
 
-        $task = new Task();
-        $task->title = $request->input('title');
-        $task->description = $request->input('description');
-        $task->start_at = $request->input('start_at');
-        $task->end_at = $request->input('end_at');
-        $task->priority = $request->input('priority');
+        try {
+            $task = new Task($tasks);
+            $task->save();
 
-        $task->save();
-
-        return response()->json($task, 201);
+            return response()->json($task, 201);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 
     public function show($id)
     {
         $task = $this->tasks->find($id);
-        $task = $task->load('livro');
 
         return response()->json($task);
     }
