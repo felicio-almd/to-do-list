@@ -33,13 +33,32 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        // Validação dos dados da requisição
+        // Validação dos dados da requisição com mensagens personalizadas
         $tasks = $request->validate([
-            'title' => 'required|string|max:50',
-            'description' => 'required|string|max:50',
+            'title' => 'required|string|min:3|max:50',
+            'description' => 'required|string|min:3|max:100',
             'start_at' => 'date|after:today',
             'end_at' => 'date|after:start_at',
             'priority' => 'required|string',
+        ], [
+            'title.required' => 'O campo título é obrigatório.',
+            'title.string' => 'O campo título deve ser uma string.',
+            'title.min' => 'O campo título deve ter mais de 3 caracteres.',
+            'title.max' => 'O campo título não pode ter mais de 50 caracteres.',
+
+            'description.required' => 'O campo descrição é obrigatório.',
+            'description.string' => 'O campo descrição deve ser uma string.',
+            'description.min' => 'O campo descrição deve ter mais de 3 caracteres.',
+            'description.max' => 'O campo descrição não pode ter mais de 50 caracteres.',
+
+            'start_at.date' => 'A data de início deve ser uma data válida.',
+            'start_at.after' => 'A data de início deve ser uma data posterior a hoje.',
+
+            'end_at.date' => 'A data de término deve ser uma data válida.',
+            'end_at.after' => 'A data de término deve ser posterior à data de início.',
+
+            'priority.required' => 'O campo prioridade é obrigatório.',
+            'priority.string' => 'O campo prioridade deve ser uma string.',
         ]);
 
         try {
