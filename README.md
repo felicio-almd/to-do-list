@@ -2,8 +2,10 @@
   <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Laravel.svg/1200px-Laravel.svg.png" height="64px" alt="To Do List" />
 
 &#xa0;
+<h4 align="center">
+    <a href="https://to-do-list-u3q0.onrender.com">API NO AR</a> 
+</h4>
 
-  <!-- <a href="https://todolist.netlify.app">Demo</a> -->
 </div>
 
 <h1 align="center">To Do List - PHP</h1>
@@ -16,9 +18,6 @@
   <img alt="Repository size" src="https://img.shields.io/github/repo-size/felicio-almd/to-do-list?color=56BEB8">
 </p>
 
-<h4 align="center">
-  🚧 To Do List 🚀 Under construction... 🚧
-</h4>
 
 <hr>
 
@@ -36,24 +35,25 @@
 ## :dart: About
 
 Part 1 - Building the back-end of a to-do list application with pure PHP, using Laravel concepts.\
-Part 2 - Integrating with a database using modern SQL tools.
+Part 2 - Integrating with a database using modern SQL tools.\
+Part 3 - Use Docker and Render for deploy the API.
 
 ## :sparkles: Features
 
 :heavy_check_mark: Feature 1 - PHP\
-:heavy_check_mark: Feature 2 - Laravel\
-:heavy_check_mark: Feature 3 - MySQL
+:heavy_check_mark: Feature 2 - Laravel RestFul API\
+:heavy_check_mark: Feature 3 - Postgres\
+:heavy_check_mark: Feature 4 - Deploy on Render\
 
 ## :rocket: Technologies
 
 The following tools were used in this project:
 
 -   [Laravel](https://laravel.com/)
--   [MySQL](https://www.mysql.com/)
 
 ## :white_check_mark: Requirements
 
-Before starting, you need to have [Git](https://git-scm.com), [PHP](), [Composer]() and [XAMPP]() installed.
+Before starting, you need to have [Git](https://git-scm.com), [PHP](), [Composer]() and [Database]() installed.
 
 ## :checkered_flag: Starting
 
@@ -67,7 +67,7 @@ $ cd to-do-list
 $ composer install
 
 # IT WILL ONLY BE STARTED IF THE COMPOSER IS INSTALLED
-# REQUIRED MYSQL OPEN AND STARTED WITH APACHE IN XAMPP
+# REQUIRED DATABASE OPEN AND STARTED
 # NEED TO CHANGE .env TO EACH DB
 
 # Install dependencies
