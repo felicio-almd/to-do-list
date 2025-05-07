@@ -2,9 +2,9 @@
   <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Laravel.svg/1200px-Laravel.svg.png" height="64px" alt="To Do List" />
 
 &#xa0;
-<h4 align="center">
+<h1 align="center">
     <a href="https://to-do-list-u3q0.onrender.com">API NO AR</a> 
-</h4>
+</h1>
 
 </div>
 
