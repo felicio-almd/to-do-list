@@ -63,14 +63,9 @@ class TaskController extends Controller
             'priority.string' => 'O campo prioridade deve ser uma string.',
         ]);
 
-        try {
-            $task = new Task($tasks);
-            $task->save();
+        $task = $this->tasks->create($tasks);
 
-            return response()->json($task, 201);
-        } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
-        }
+        return response()->json($task, Response::HTTP_CREATED);
     }
 
     public function show($id)
