@@ -2,13 +2,15 @@
   <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Laravel.svg/1200px-Laravel.svg.png" height="64px" alt="To Do List" />
 
 &#xa0;
-<h1 align="center">
-    <a href="https://to-do-list-u3q0.onrender.com">API NO AR</a> 
-</h1>
 
 </div>
 
 <h1 align="center">To Do List - PHP</h1>
+
+<h2 align="center">
+    <a href="https://to-do-list-u3q0.onrender.com/api/tasks">Link para a API</a> 
+</h2>
+<p align="center"> https://to-do-list-u3q0.onrender.com/api/tasks </p>
 
 <p align="center">
   <img alt="Github top language" src="https://img.shields.io/github/languages/top/felicio-almd/to-do-list?color=56BEB8">
